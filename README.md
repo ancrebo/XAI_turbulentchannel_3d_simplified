@@ -1,0 +1,2 @@
+# XAI_turbulentchannel_3d_simplified
+Repository for calculating SHAP structures
