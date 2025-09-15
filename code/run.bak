@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -ex
+
+# This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
+
+# Run the 3d simulations
+cd ./
+python -u main_statistics.py "$@"
+python -u prepare_tfrecords.py "$@"
+python -u main_CNN.py "$@"
+python -u plot_training_epoch.py "$@"
+python -u calc_pred_error.py "$@"
+python -u plot_predictions.py "$@"
+python -u main_SHAP.py "$@"
+python -u plot_shaps_noise.py "$@"
+python -u shap_check_repetitions.py "$@"
+python -u main_statisticsSHAP.py "$@"
+python -u main_percolation_shapstruc_range.py "$@"
+python -u create_SHAPstruc_dataset.py "$@"
+python -u plot_shap_3d.py "$@"
+python -u plot_uv_3d.py "$@"
+python -u plot_streak_3d.py "$@"
+python -u plot_chong_3d.py "$@"
+python -u plot_histuvw_shap_y_range.py "$@"
+python -u plot_histuvw_uv_y_range.py "$@"
+python -u plot_histuvw_streak_y_range.py "$@"
+python -u plot_histuvw_chong_y_range.py "$@"
+python -u calc_uv_shap_coinc_y_range.py "$@"
+python -u calc_chong_shap_coinc_y_range.py "$@"
+python -u calc_streak_shap_coinc_y_range.py "$@"
+python -u plot_coinc_pairs_uv_streak_chong_2_shap.py "$@"
+python -u calc_Q_chong_streak_coinc_y.py "$@"
+python -u plot_Q_streak_chong_coinc_y_matrix_cont_shap.py "$@"
+python -u plot_Q_streak_chong_coinc_y_matrix_cont_shap_zoom.py "$@"
+
+echo "Final"
+
