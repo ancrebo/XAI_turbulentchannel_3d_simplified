@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -ex
+
+# This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
+
+# Run the 3d simulations
+cd ./
+echo "-----Statistics flow-----"
+python -u main_statistics.py "$@"
+echo "-----TFRecords-----"
+python -u prepare_tfrecords.py "$@"
+echo "-----Train model-----"
+python -u main_CNN.py "$@"
+echo "-----Plot training-----"
+python -u plot_training_epoch.py "$@"
+echo "-----Calc model error-----"
+python -u calc_pred_error.py "$@"
+echo "-----Plot model prediction-----"
+python -u plot_predictions.py "$@"
+echo "-----Calculate SHAP-----"
+python -u main_SHAP.py "$@"
+echo "-----Plot SHAP noise-----"
+python -u plot_shaps_noise.py "$@"
+echo "-----Check SHAP noise-----"
+python -u shap_check_repetitions.py "$@"
+echo "-----SHAP statistics-----"
+python -u main_statisticsSHAP.py "$@"
+echo "-----SHAP structures percolation-----"
+python -u main_percolation_shapstruc_range.py "$@"
+echo "-----Create SHAP structures-----"
+python -u create_SHAPstruc_dataset.py "$@"
+echo "-----Plot structures: SHAP, Q events, streaks and vortices-----"
+python -u plot_shap_3d.py "$@"
+python -u plot_uv_3d.py "$@"
+python -u plot_streak_3d.py "$@"
+python -u plot_chong_3d.py "$@"
+echo "-----Plot velocity pdfs: SHAP, Q events, streaks and vortices-----"
+python -u plot_histuvw_shap_y_range.py "$@"
+python -u plot_histuvw_uv_y_range.py "$@"
+python -u plot_histuvw_streak_y_range.py "$@"
+python -u plot_histuvw_chong_y_range.py "$@"
+echo "-----Calculate and plot coincidence between SHAP structures and Q events, streaks and vortices-----"
+python -u calc_uv_shap_coinc_y_range.py "$@"
+python -u calc_chong_shap_coinc_y_range.py "$@"
+python -u calc_streak_shap_coinc_y_range.py "$@"
+python -u plot_coinc_pairs_uv_streak_chong_2_shap.py "$@"
+echo "-----Calculate coincidence between Q events, streaks and vortices and plot with SHAP structures-----"
+python -u calc_Q_chong_streak_coinc_y.py "$@"
+python -u plot_Q_streak_chong_coinc_y_matrix_cont_shap.py "$@"
+python -u plot_Q_streak_chong_coinc_y_matrix_cont_shap_zoom.py "$@"
+
+echo "Final"
+
