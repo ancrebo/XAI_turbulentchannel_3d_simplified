@@ -100,3 +100,8 @@ ____________________________________________________________________________
 	  reduced region.  Use the "_real" folder to obtain realistic results.
 	  
 
+-------------------------------------------------------------------------------------------------------
+Note: 
+-------------------------------------------------------------------------------------------------------
+The dataset in data/phys has been downsampled by a factor of 3 due to the limitations in the 
+repository.
